@@ -32,8 +32,8 @@ int main() {
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            A[i][j]     = 1.0;
-            B_mat[i][j] = 2.0;
+            A[i][j]     = rand() % N;
+            B_mat[i][j] = rand() % N;
         }
     }
 
