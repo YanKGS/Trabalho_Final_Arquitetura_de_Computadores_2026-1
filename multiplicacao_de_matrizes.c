@@ -1,30 +1,35 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
+#include <time.h>
  
-#define N 1024
+#define ROWS  5000
+#define COLS   100
+#define K_MAX  100
+
  
-int main() {
-    static double A[N][N];
-    static double B_mat[N][N];
-    static double C[N][N];
-    srand(0);
-    
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            A[i][j]     = rand() % N;
-            B_mat[i][j] = rand() % N;
-        }
-    }
+static double x[ROWS][COLS];
+ 
+int main(void) {
  
  
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            C[i][j] = 0;
-            for (int x = 0; x < N; x++) {
-                C[i][j] += A[i][x] * B_mat[x][j];
-            }
-        }
-    }
+    memset(x, 1, sizeof(x));
+ 
+    int i, j, k;
+    /* for (k = 0; k < K_MAX; k++)      
+        for (j = 0; j < COLS; j++)
+            for (i = 0; i < ROWS; i++)
+                x[i][j] = 2 * x[i][j]; */
+ 
+                               
+ 
+    memset(x, 1, sizeof(x));
+ 
+    for (k = 0; k < K_MAX; k++)
+        for (i = 0; i < ROWS; i++)
+            for (j = 0; j < COLS; j++)
+                x[i][j] = 2 * x[i][j];
+ 
+ 
  
     return 0;
 }

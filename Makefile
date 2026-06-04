@@ -26,6 +26,6 @@ perf3: multiplicacao_de_matrizes_bloco_2
 	perf stat -e $(PERF_EVENTS) ./multiplicacao_de_matrizes_bloco_2
 
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) multiplicacao_de_matrizes_bloco_2 multiplicacao_de_matrizes_bloco
  
 .PHONY: all perf clean
