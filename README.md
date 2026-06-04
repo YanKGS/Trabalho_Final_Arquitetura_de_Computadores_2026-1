@@ -1,0 +1,1 @@
+# Trabalho_Final_Arquitetura_de_Computadores_2026-1
