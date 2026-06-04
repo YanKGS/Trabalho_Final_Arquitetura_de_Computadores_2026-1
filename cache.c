@@ -2,7 +2,7 @@
 #include <time.h>
 
 #define KB 1024
-#define MB 1024 * 1024
+#define MB 1048576
 
 int main(){
    
@@ -14,7 +14,7 @@ int main(){
    static int array[8*MB];
    int i,j;
    unsigned int k;
-   for(i=1;i<=2048;i*=2){
+   for(i=1;i<=MB;i*=2){
       totalTime=0;
       for(j=0;j<6;j++){
          start = clock();
