@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <string.h>
-#include <time.h>
  
 #define ROWS  5000
 #define COLS   100
@@ -15,10 +14,10 @@ int main(void) {
     memset(x, 1, sizeof(x));
  
     int i, j, k;
-    /* for (k = 0; k < K_MAX; k++)      
+    for (k = 0; k < K_MAX; k++)      
         for (j = 0; j < COLS; j++)
             for (i = 0; i < ROWS; i++)
-                x[i][j] = 2 * x[i][j]; */
+                x[i][j] = 2 * x[i][j];
  
                                
  
