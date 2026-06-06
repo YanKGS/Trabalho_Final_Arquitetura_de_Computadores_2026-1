@@ -1,20 +1,22 @@
 #include <stdio.h>
 #include <string.h>
  
-#define ROWS  5000
-#define COLS   100
-#define K_MAX  100
+#define N  512
 
- 
-static double x[ROWS][COLS];
- 
-int main(void) {
-    memset(x, 1, sizeof(x));
-    int i, j, k;
-    for (k = 0; k < K_MAX; k++)
-        for (i = 0; i < ROWS; i++)
-            for (j = 0; j < COLS; j++)
-                x[i][j] = 2 * x[i][j];
- 
-    return 0;
+int main() 
+{
+    static long A[N][N];
+    static long B[N][N];
+    static long C[N][N];
+
+    memset(A, 2, sizeof(A));
+    memset(B, 3, sizeof(B));
+    memset(C, 0, sizeof(C));
+
+    for (int col = 0; col < N; col++)
+        for (int lin = 0; lin < N; lin++)
+            for (int k = 0; k < N; k++)
+                C[lin][col] += A[lin][k] * B[k][col];
+
+    return (0);
 }

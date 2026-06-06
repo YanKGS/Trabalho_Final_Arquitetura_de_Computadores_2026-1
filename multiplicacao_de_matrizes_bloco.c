@@ -1,23 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-#define N     1024
-#define BLOCK   256
+#define N     512
+#define BLOCK   64
 
-void multiplica_por_blocos(long A[N][N], long B_mat[N][N], long C[N][N]) {
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++)
-            C[i][j] = 0;
-
-    for (int i = 0; i < N; i += BLOCK) {
-        for (int j = 0; j < N; j += BLOCK) {
-            for (int k = 0; k < N; k += BLOCK) {
-                for (int i_b = i; i_b < i + BLOCK; i_b++) {
-                    for (int k_b = k; k_b < k + BLOCK; k_b++) {
-                        long a_ik = A[i_b][k_b];
-                        for (int j_b = j; j_b < j + BLOCK; j_b++) {
-                            C[i_b][j_b] += a_ik * B_mat[k_b][j_b];
-                        }
+void multiplica_por_blocos(long A[N][N], long B[N][N], long C[N][N]) 
+{
+    for (int lin = 0; lin < N; lin += BLOCK) 
+    {
+        for (int col = 0; col < N; col += BLOCK) 
+        {
+            for (int k = 0; k < N; k += BLOCK) 
+            {
+                for (int lin_b = lin; lin_b < lin + BLOCK; lin_b++) 
+                {
+                    for (int col_b = col; col_b < col + BLOCK; col_b++)  
+                    {
+                        for (int k_b = k; k_b < k + BLOCK; k_b++)
+                            C[lin_b][col_b] += A[lin_b][k_b] * B[k_b][col_b];
                     }
                 }
             }
@@ -25,21 +26,17 @@ void multiplica_por_blocos(long A[N][N], long B_mat[N][N], long C[N][N]) {
     }
 }
 
-int main() {
+int main() 
+{
     static long A[N][N];
-    static long B_mat[N][N];
+    static long B[N][N];
     static long C[N][N];
-    srand(0);
 
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            A[i][j]     = rand() % N;
-            B_mat[i][j] = rand() % N;
-        }
-    }
+    memset(A, 2, sizeof(A));
+    memset(B, 3, sizeof(B));
+    memset(C, 0, sizeof(C));
 
-    multiplica_por_blocos(A, B_mat, C);
+    multiplica_por_blocos(A, B, C);
 
-
-    return 0;
+    return (0);
 }
