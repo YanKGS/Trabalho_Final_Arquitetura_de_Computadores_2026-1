@@ -1,29 +1,44 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 #define KB 1024
-#define MB 1048576 * 64
-#define STRIDE_FIX 64
+#define MB (1024 * 1024)
+#define STRIDE 64
+#define REPETICOES 10000
 
 int main() {
-  long inicio = STRIDE_FIX;
-  int vet_tam = 8 * MB - 1;
-  double temp_total, temp_gasto;
-  volatile int aux = 0;
+  clock_t inicio;
+  double temp_total;
+  int i;
 
-  static int vet[STRIDE_FIX];
-  int i, j;
-  unsigned int k;
-
-  for (i = STRIDE_FIX; i <= MB; i *= 2) {
-    temp_total = 0;
-    for (j = 0; j < 6; j++) {
-      inicio = clock();
-
-      temp_gasto = (double)(clock() - inicio) / CLOCKS_PER_SEC;
-      temp_total += temp_gasto;
+  for (i = KB; i <= 64 * MB; i *= 2) {
+    volatile char* vet = malloc(i);
+    if (!vet) {
+      return -1;
     }
-    temp_total /= 6;
-    printf("Para i valendo: %d Tempo gasto:%lf\n", i, temp_total);
+
+    // Inicializa fora da medicao
+    for (int j = 0; j < i; j++) {
+      vet[j] = 1;
+    }
+
+    // Medicao
+    inicio = clock();
+
+    for (int r = 0; r < REPETICOES; r++) {
+      for (int j = 0; j < i; j += STRIDE) {
+        (void)vet[j];
+      }
+    }
+
+    temp_total = ((double)(clock() - inicio) / CLOCKS_PER_SEC) * 1e9;
+    double ciclos_por_acesso = temp_total / ((double)REPETICOES * (i / STRIDE));
+    printf("Buffer: %6d KB | Tempo por acesso: %.4f ns\n", i / KB,
+           ciclos_por_acesso);
+
+    free((void*)vet);
   }
+
+  return 0;
 }
