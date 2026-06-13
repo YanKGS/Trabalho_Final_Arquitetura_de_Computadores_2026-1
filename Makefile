@@ -21,6 +21,7 @@ multiplicacao_de_matrizes_bloco_2: multiplicacao_de_matrizes_bloco_2.c
 
 cacheline: cacheline.c
 	$(CC) $(CFLAGS) cacheline.c -o cacheline
+
 cache: cache.c 
 	$(CC) $(CFLAGS) cache.c -o cache
 
