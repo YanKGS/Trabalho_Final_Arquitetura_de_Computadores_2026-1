@@ -19,8 +19,8 @@ multiplicacao_de_matrizes_bloco: multiplicacao_de_matrizes_bloco.c
 multiplicacao_de_matrizes_bloco_2: multiplicacao_de_matrizes_bloco_2.c
 	$(CC) $(CFLAGS) multiplicacao_de_matrizes_bloco_2.c -o multiplicacao_de_matrizes_bloco_2
 
-cacheline: cache.c
-	$(CC) $(CFLAGS) cache.c -o cacheline
+cacheline: cacheline.c
+	$(CC) $(CFLAGS) cacheline.c -o cacheline
 
 perf: $(TARGET)
 	perf stat -e $(PERF_EVENTS) ./$(TARGET)
